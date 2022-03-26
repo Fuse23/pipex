@@ -6,7 +6,7 @@
 /*   By: falarm <falarm@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:02:27 by falarm            #+#    #+#             */
-/*   Updated: 2022/03/22 20:58:57 by falarm           ###   ########.fr       */
+/*   Updated: 2022/03/25 19:11:37 by falarm           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 # include <string.h>
 # include <fcntl.h>
 
+void	error_cmd(char *cmd);
 void	error_file(char *file);
 void	error_process(void);
-void	error_cmd(char *cmd);
-char	**find_path(char **envp);
+void	check_fd(int *fd1, int *fd2, char **argv);
+char	**find_path(char **env);
 char	*get_line(char *cmd, char **arr);
-void	check_fd(int *in, int *out, char **files);
 
 #endif
