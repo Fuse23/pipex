@@ -6,7 +6,7 @@
 /*   By: falarm <falarm@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:50:19 by falarm            #+#    #+#             */
-/*   Updated: 2022/06/09 21:33:16 by falarm           ###   ########.fr       */
+/*   Updated: 2022/06/10 21:02:44 by falarm           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,24 @@ void	child_process(char *argv, char **env)
 	}
 }
 
+void	here_doc_process(int fd, char *limiter)
+{
+	char	*line;
+
+	write(1, "heredoc> ", 9);
+	while (get_next_line(&line))
+	{
+		if (!ft_strncmp(line, limiter, ft_strlen(limiter)))
+			exit(EXIT_SUCCESS);
+		write(fd, line, ft_strlen(line));
+		write(1, "heredoc> ", 9);
+	}
+}
+
 void	here_doc(char *limiter)
 {
 	pid_t	pid;
 	int		p[2];
-	char	*line;
 
 	if (pipe(p) == -1)
 		error_process();
@@ -50,12 +63,7 @@ void	here_doc(char *limiter)
 	if (pid == 0)
 	{
 		close(p[0]);
-		while (get_next_line(&line))
-		{
-			if (!ft_strncmp(line, limiter, ft_strlen(limiter)))
-				exit(EXIT_SUCCESS);
-			write(p[1], line, ft_strlen(line));
-		}
+		here_doc_process(p[1], limiter);
 	}
 	else
 	{
@@ -90,6 +98,8 @@ void	pipex(int argc, char **argv, char **env)
 		child_process(argv[i++], env);
 	dup2(out, 1);
 	execute(argv[argc - 2], env);
+	close(in);
+	close(out);
 }
 
 int	main(int argc, char **argv, char **env)

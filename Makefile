@@ -1,5 +1,4 @@
 NAME_PS = pipex
-NAME = pipex_bonus
 
 CC = gcc
 FLAGS = -Wall -Werror -Wextra
@@ -52,7 +51,7 @@ $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
 
 bonus: $(OBJECTS_DIRECTORY_B) $(OBJECTS_BONUS)
 	$(MAKE) -sC $(LIBFT_DIRECTORY)
-	$(CC) $(FLAGS) $(LIBRARIES) $(INCLUDES_BONUS) $(OBJECTS_BONUS) -o $(NAME)
+	$(CC) $(FLAGS) $(LIBRARIES) $(INCLUDES_BONUS) $(OBJECTS_BONUS) -o $(NAME_PS)
 
 $(OBJECTS_DIRECTORY_B):
 	mkdir -p $(OBJECTS_DIRECTORY_B)
@@ -68,7 +67,6 @@ clean:
 fclean: clean
 	rm -f $(LIBFT_A)
 	rm -f $(NAME_PS)
-	rm -f $(NAME)
 
 re:
 	$(MAKE) fclean

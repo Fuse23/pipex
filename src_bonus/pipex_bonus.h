@@ -6,7 +6,7 @@
 /*   By: falarm <falarm@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:02:27 by falarm            #+#    #+#             */
-/*   Updated: 2022/06/09 21:33:52 by falarm           ###   ########.fr       */
+/*   Updated: 2022/06/10 21:02:54 by falarm           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int		open_file(char *argv, int i);
 
 //main_bonus.c
 void	child_process(char *argv, char **env);
+void	here_doc_process(int fd, char *limiter);
 void	here_doc(char *limiter);
 void	pipex(int argc, char **argv, char **env);
 
